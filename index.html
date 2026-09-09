@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acta interactiva · Navegación FALP</title>
+  <style>
+    :root { --navy:#1d3e70; --blue:#5683e9; --blue-pale:#edf3ff; --yellow:#f4cb4a; --ink:#3e4653; --line:#d9e1ee; --paper:#fffefa; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:#f7f9fc; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height:1.55; }
+    .shell { display:grid; grid-template-columns:290px minmax(0,1fr); min-height:100vh; }
+    aside { position:sticky; top:0; height:100vh; padding:35px 25px; color:#fff; background:var(--navy); overflow:auto; }
+    .brand { display:flex; align-items:center; gap:11px; margin-bottom:36px; font-weight:800; letter-spacing:.04em; }
+    .brand-mark { width:38px; height:38px; position:relative; border:3px solid var(--yellow); border-radius:12px 12px 12px 3px; transform:rotate(-6deg); }
+    .brand-mark::after { content:"+"; position:absolute; inset:-5px 0 0 0; text-align:center; color:var(--yellow); font-size:30px; font-weight:800; transform:rotate(6deg); }
+    .eyebrow { margin:0 0 6px; color:var(--yellow); font-size:.78rem; font-weight:800; letter-spacing:.11em; text-transform:uppercase; }
+    aside h1 { margin:0 0 7px; font-size:1.55rem; line-height:1.12; }
+    .date { margin:0 0 29px; color:#cad8f8; font-size:.9rem; }
+    nav { display:grid; gap:5px; }
+    nav a { padding:10px 12px; border-left:3px solid transparent; color:#dbe6ff; text-decoration:none; font-weight:650; font-size:.91rem; transition:.2s; }
+    nav a:hover, nav a.active { border-left-color:var(--yellow); color:#fff; background:rgba(255,255,255,.1); }
+    .aside-note { margin-top:34px; padding:15px; border:1px solid rgba(255,255,255,.25); border-radius:15px; color:#e9efff; font-size:.84rem; }
+    .aside-note strong { display:block; color:var(--yellow); margin-bottom:3px; }
+    main { width:min(1080px, 100%); margin:0 auto; padding:44px 54px 86px; }
+    .hero { display:grid; grid-template-columns:1.25fr .75fr; gap:25px; align-items:end; min-height:250px; margin-bottom:34px; padding:39px; overflow:hidden; position:relative; background:var(--paper); border:1px solid var(--line); border-radius:24px; }
+    .hero::after { content:""; width:330px; height:145px; position:absolute; right:-55px; bottom:-85px; border:8px solid var(--yellow); border-radius:55% 45% 0 0; transform:rotate(-11deg); opacity:.9; }
+    .hero h2 { position:relative; z-index:1; max-width:650px; margin:0; color:var(--navy); font-size:clamp(2rem,4vw,3.7rem); line-height:1.03; letter-spacing:-.045em; }
+    .hero h2 span { color:var(--blue); }
+    .hero p { position:relative; z-index:1; max-width:600px; margin:20px 0 0; font-size:1.08rem; }
+    .route-art { position:relative; z-index:1; height:150px; }
+    .hospital { position:absolute; right:20px; bottom:0; width:132px; height:88px; border:4px solid var(--navy); border-bottom-width:7px; border-radius:5px 5px 0 0; background:linear-gradient(90deg,transparent 32%,var(--navy) 32% 35%,transparent 35% 66%,var(--navy) 66% 69%,transparent 69%); }
+    .hospital::before { content:"+"; position:absolute; top:-44px; left:44px; width:36px; height:36px; border-radius:50%; background:#fff; color:var(--navy); font:bold 36px/34px system-ui; text-align:center; border:3px solid var(--navy); }
+    .hospital::after { content:""; position:absolute; width:18px; height:23px; left:52px; bottom:0; background:var(--blue); border:3px solid var(--navy); border-bottom:0; }
+    .path { position:absolute; right:110px; bottom:24px; width:128px; height:75px; border-bottom:6px solid var(--yellow); border-right:6px solid var(--yellow); border-radius:0 0 80px 0; transform:skewY(-18deg) rotate(12deg); }
+    .intro { display:flex; align-items:flex-start; gap:14px; margin:0 0 34px; padding:18px 21px; background:#fff9df; border-left:5px solid var(--yellow); border-radius:0 15px 15px 0; }
+    .intro svg { flex:0 0 28px; margin-top:2px; }
+    .intro p { margin:0; }
+    section { scroll-margin-top:24px; margin:44px 0; }
+    .section-title { display:flex; align-items:center; gap:14px; margin:0 0 20px; color:var(--navy); font-size:clamp(1.45rem,2.5vw,2.1rem); line-height:1.12; }
+    .section-number { display:grid; place-items:center; flex:0 0 42px; width:42px; height:42px; color:#fff; background:var(--blue); border-radius:13px 13px 13px 3px; font-size:1rem; font-weight:800; transform:rotate(-3deg); }
+    .card { margin-top:15px; padding:25px; background:#fff; border:1px solid var(--line); border-radius:18px; box-shadow:0 9px 24px rgba(28,58,105,.06); }
+    .card h3 { margin:0 0 9px; color:var(--navy); font-size:1.08rem; }
+    .card p:last-child { margin-bottom:0; }
+    .challenge { display:grid; grid-template-columns:1fr 46px 1fr 46px 1.3fr; gap:12px; align-items:center; }
+    .challenge .piece { min-height:140px; padding:20px; background:var(--blue-pale); border-radius:16px; }
+    .challenge .piece strong { display:block; margin-bottom:8px; color:var(--blue); font-size:.78rem; letter-spacing:.09em; text-transform:uppercase; }
+    .challenge .arrow { color:var(--yellow); font-size:2rem; font-weight:900; text-align:center; }
+    .quote { margin:18px 0 0; padding:15px 19px; border-left:4px solid var(--blue); background:#f8faff; border-radius:0 12px 12px 0; }
+    .quote p { margin:0; }
+    .priority-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
+    .priority { min-height:190px; padding:22px; border-radius:18px; background:#fff; border:1px solid var(--line); }
+    .priority:nth-child(1) { border-top:7px solid var(--yellow); }
+    .priority:nth-child(2) { border-top:7px solid var(--blue); }
+    .priority:nth-child(3) { border-top:7px solid var(--navy); }
+    .priority .tag { display:inline-block; margin-bottom:13px; padding:4px 9px; color:var(--navy); background:#fff5c9; border-radius:20px; font-size:.73rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+    .priority h3 { margin:0 0 8px; color:var(--navy); font-size:1.12rem; line-height:1.2; }
+    .priority p { margin:0; font-size:.92rem; }
+    details { margin:10px 0; overflow:hidden; background:#fff; border:1px solid var(--line); border-radius:14px; }
+    summary { display:flex; align-items:center; cursor:pointer; padding:16px 18px; color:var(--navy); font-weight:750; list-style:none; }
+    summary::before { content:"+"; display:grid; place-items:center; width:24px; height:24px; margin-right:11px; color:#fff; background:var(--blue); border-radius:7px; font-size:1.18rem; font-weight:500; }
+    details[open] summary::before { content:"–"; }
+    .detail-content { padding:0 18px 18px 53px; }
+    .detail-content p { margin:0; }
+    .risk-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .risk { padding:20px; background:#fff; border:1px solid var(--line); border-radius:16px; }
+    .risk .risk-icon { display:grid; place-items:center; width:35px; height:35px; margin-bottom:12px; color:var(--navy); background:#fff1b4; border-radius:50% 50% 50% 5px; font-weight:900; }
+    .risk h3 { margin:0 0 8px; color:var(--navy); font-size:1rem; }
+    .risk p { margin:0; font-size:.91rem; }
+    .timeline { position:relative; display:grid; gap:0; padding-left:28px; }
+    .timeline::before { content:""; position:absolute; top:10px; bottom:10px; left:7px; width:3px; background:var(--yellow); }
+    .event { position:relative; padding:0 0 21px 23px; }
+    .event::before { content:""; position:absolute; top:5px; left:-1px; width:14px; height:14px; background:var(--blue); border:3px solid #fff; border-radius:50%; box-shadow:0 0 0 2px var(--navy); }
+    .event h3 { margin:0 0 3px; color:var(--navy); font-size:1rem; }
+    .event p { margin:0; }
+    table { width:100%; border-collapse:collapse; font-size:.93rem; }
+    th, td { padding:14px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); }
+    th { color:var(--navy); background:var(--blue-pale); font-size:.78rem; letter-spacing:.07em; text-transform:uppercase; }
+    tr:last-child td { border-bottom:0; }
+    .next { margin-top:22px; padding:25px; color:#fff; background:var(--navy); border-radius:20px; }
+    .next h3 { margin:0 0 6px; color:var(--yellow); }
+    .next p { margin:0; color:#e6edff; }
+    footer { padding:18px 0 0; color:#718096; font-size:.82rem; text-align:center; }
+    @media (max-width:860px) { .shell { display:block; } aside { position:sticky; z-index:2; display:flex; align-items:center; width:100%; height:auto; padding:13px 18px; overflow:hidden; } .brand,.eyebrow,aside h1,.date,.aside-note { display:none; } nav { display:flex; width:100%; overflow:auto; gap:3px; } nav a { flex:0 0 auto; border-left:0; border-bottom:3px solid transparent; padding:7px 9px; font-size:.78rem; } nav a:hover,nav a.active { border-left:0; border-bottom-color:var(--yellow); } main { padding:28px 20px 65px; } .hero { grid-template-columns:1fr; min-height:0; padding:28px; } .route-art { display:none; } .challenge { grid-template-columns:1fr; } .challenge .arrow { transform:rotate(90deg); height:24px; } .priority-grid,.risk-grid { grid-template-columns:1fr; } table { min-width:680px; } .table-wrap { overflow:auto; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <div class="brand"><span class="brand-mark" aria-hidden="true"></span> NAVEGA FALP</div>
+      <p class="eyebrow">Diplomado Diseño de Servicios UC</p>
+      <h1>Acta de co-creación</h1>
+      <p class="date">9 de septiembre de 2026</p>
+      <nav aria-label="Secciones del acta">
+        <a class="active" href="#inicio">Inicio</a>
+        <a href="#desafio">Hallazgo y desafío</a>
+        <a href="#ideas">Ideas priorizadas</a>
+        <a href="#riesgos">Prevenciones y riesgos</a>
+        <a href="#registro">Registro interno</a>
+        <a href="#compromisos">Compromisos</a>
+      </nav>
+      <div class="aside-note"><strong>Prototipo de conversación</strong>Utiliza información ficticia o autorizada. No reemplaza los sistemas clínicos institucionales.</div>
+    </aside>
+
+    <main id="inicio">
+      <header class="hero">
+        <div>
+          <p class="eyebrow" style="color:var(--blue)">Taller de co-creación</p>
+          <h2>Una ruta clara para <span>acompañar.</span></h2>
+          <p>Acta interactiva para compartir prioridades, decisiones y próximos pasos entre las enfermeras navegadoras y el equipo del diplomado.</p>
+        </div>
+        <div class="route-art" aria-hidden="true"><div class="path"></div><div class="hospital"></div></div>
+      </header>
+
+      <div class="intro">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#1d3e70" d="M14 3h4v11h11v4H18v11h-4V18H3v-4h11z"/></svg>
+        <p><strong>Propósito de esta página.</strong> Hacer visible lo acordado y permitir que cada persona navegue directamente a la información que necesita. El avance del proyecto depende de complementar esta acta con el alcance del desarrollo interno y las rutas de pacientes.</p>
+      </div>
+
+      <section id="desafio">
+        <h2 class="section-title"><span class="section-number">1</span> Hallazgo, oportunidad y desafío</h2>
+        <div class="challenge">
+          <div class="piece"><strong>Hallazgo</strong>La derivación requiere coordinación entre enfermeras navegadoras y actores internos y externos.</div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="piece"><strong>Oportunidad</strong>Ordenar flujos, responsabilidades y trazabilidad para acompañar de forma más oportuna.</div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="piece"><strong>Desafío de diseño</strong>¿Cómo podríamos optimizar los procesos de trabajo en la etapa de derivación para realizar un acompañamiento eficaz y oportuno?</div>
+        </div>
+        <div class="quote"><p>Se eliminó del hallazgo previo la idea de “alta carga mental y desgaste emocional” como característica del cargo, pues el equipo no concordó con esa formulación. El diseño puede, sin embargo, ayudar a ordenar la gestión cotidiana.</p></div>
+      </section>
+
+      <section id="ideas">
+        <h2 class="section-title"><span class="section-number">2</span> Ideas priorizadas</h2>
+        <div class="priority-grid">
+          <article class="priority"><span class="tag">Prioridad 1</span><h3>Registro de gestiones</h3><p>Incorpora pacientes, hitos y cumplimiento del plan de navegación.</p></article>
+          <article class="priority"><span class="tag">Prioridad 2</span><h3>Plan y perfiles de navegación</h3><p>Definir los cuatro tipos de pacientes y sus rutas principales para orientar tareas y seguimiento.</p></article>
+          <article class="priority"><span class="tag">Prioridad 3</span><h3>Flujos de comunicación</h3><p>Protocolos, responsables y tiempos máximos de respuesta entre actores.</p></article>
+        </div>
+        <div class="card">
+          <h3>Lo que necesitamos definir</h3>
+          <p>Las enfermeras pueden compartir por correo o audio los cuatro perfiles de pacientes, sus rutas y los hitos más relevantes. El equipo del diplomado puede procesar ambos formatos.</p>
+        </div>
+        <details><summary>Comentarios del equipo sobre las ideas</summary><div class="detail-content"><p><strong>Analía</strong> señaló que el sistema de registro ya está en desarrollo y que el plan de navegación aún se realiza de manera no estructurada. <strong>Carla</strong> destacó que los hitos permitirían medir cumplimiento y fricciones. <strong>Carolina</strong> indicó que existen al menos cuatro tipos de pacientes con rutas distintas y que el nudo crítico de los flujos externos es la oportunidad de respuesta.</p></div></details>
+      </section>
+
+      <section id="riesgos">
+        <h2 class="section-title"><span class="section-number">3</span> Prevenciones y riesgos</h2>
+        <div class="risk-grid">
+          <article class="risk"><div class="risk-icon">!</div><h3>Plazo de implementación</h3><p>La solución propuesta debe ser abordable y ejecutable dentro del periodo restante del diplomado.</p></article>
+          <article class="risk"><div class="risk-icon">↔</div><h3>Información incompleta</h3><p>Sin conocer el desarrollo actual y de corto plazo, existe riesgo de retrabajo o de duplicar esfuerzos.</p></article>
+          <article class="risk"><div class="risk-icon">⌁</div><h3>Datos y red externa</h3><p>Las restricciones de protección de datos y los tiempos de respuesta externos condicionan los flujos posibles.</p></article>
+        </div>
+        <div class="card"><h3>Prevención clave</h3><p>Antes de proponer una solución, se requiere definir qué datos son accesibles, qué puede registrarse y por qué canales se puede comunicar la información. También deben compartirse antecedentes públicos relevantes sobre protección de datos en salud.</p></div>
+      </section>
+
+      <section id="registro">
+        <h2 class="section-title"><span class="section-number">4</span> Sistema de registro interno</h2>
+        <div class="card">
+          <div class="timeline">
+            <article class="event"><h3>Reunión con Plataforma Trazabilidad</h3><p>El equipo informó avances en un registro propio de la unidad.</p></article>
+            <article class="event"><h3>Ambiente de pruebas</h3><p>Se esperaba la entrega del ambiente para probar la gestión de tareas y los ajustes solicitados.</p></article>
+            <article class="event"><h3>Implementación y marco jurídico</h3><p>Se revisaron limitaciones y alternativas con equipos de implementación, Servicio de Salud y división jurídica.</p></article>
+          </div>
+        </div>
+        <div class="card"><h3>Oportunidad de aporte del diplomado</h3><p>Conocer el alcance de la Plataforma de Trazabilidad permitiría identificar necesidades de navegación no mapeadas y aportar criterios de diseño desde la experiencia cotidiana de las enfermeras. El objetivo no es repetir el encargo tecnológico, sino complementar aquello que no cubra.</p></div>
+      </section>
+
+      <section id="compromisos">
+        <h2 class="section-title"><span class="section-number">5</span> Compromisos y comunicaciones</h2>
+        <div class="card table-wrap">
+          <table>
+            <thead><tr><th>Responsable</th><th>Entrega pendiente</th><th>Para qué sirve</th></tr></thead>
+            <tbody>
+              <tr><td>Equipo del diplomado</td><td>Enviar esta acta y la priorización.</td><td>Validar la síntesis y orientar el siguiente ciclo.</td></tr>
+              <tr><td>Equipo de enfermeras</td><td>Enviar feedback y el documento de desafío de diseño.</td><td>Confirmar o ajustar hallazgos, oportunidad e ideas.</td></tr>
+              <tr><td>Enfermeras / Tecnología</td><td>Compartir alcance, usuarios, funciones, datos y cronograma del registro en desarrollo.</td><td>Evitar duplicaciones y delimitar una solución complementaria.</td></tr>
+              <tr><td>Equipo de enfermeras</td><td>Precisar los cuatro perfiles, rutas y brechas que persistirían.</td><td>Definir la necesidad concreta que responderá el diplomado.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="next"><h3>Siguiente paso</h3><p>Con la información pendiente, el equipo podrá decidir si aporta a una plataforma, un apoyo gráfico o un diseño de plan de navegación, enfocando el esfuerzo en una brecha real y viable.</p></div>
+      </section>
+      <footer>Propuesta conceptual · Taller de co-creación · Navegación FALP</footer>
+    </main>
+  </div>
+  <script>
+    const links = [...document.querySelectorAll('nav a')];
+    const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+    }), { rootMargin: '-25% 0px -65% 0px' });
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
+
