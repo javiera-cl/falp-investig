@@ -46,6 +46,10 @@
     .challenge .piece { min-height:140px; padding:20px; background:var(--blue-pale); border-radius:16px; }
     .challenge .piece strong { display:block; margin-bottom:8px; color:var(--blue); font-size:.78rem; letter-spacing:.09em; text-transform:uppercase; }
     .challenge .arrow { color:var(--yellow); font-size:2rem; font-weight:900; text-align:center; }
+    .challenge details { min-height:140px; margin:0; border:0; background:var(--blue-pale); border-radius:16px; }
+    .challenge details summary { min-height:140px; padding:20px; align-items:flex-start; color:var(--blue); font-size:.78rem; letter-spacing:.09em; text-transform:uppercase; }
+    .challenge details[open] summary { min-height:auto; padding-bottom:0; }
+    .challenge details .detail-content { padding:12px 20px 20px; color:var(--ink); font-size:1rem; letter-spacing:0; text-transform:none; }
     .quote { margin:18px 0 0; padding:15px 19px; border-left:4px solid var(--blue); background:#f8faff; border-radius:0 12px 12px 0; }
     .quote p { margin:0; }
     .priority-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
@@ -99,7 +103,6 @@
         <a href="#registro">Registro interno</a>
         <a href="#compromisos">Compromisos</a>
       </nav>
-      <div class="aside-note"><strong>Prototipo de conversación</strong>Utiliza información ficticia o autorizada. No reemplaza los sistemas clínicos institucionales.</div>
     </aside>
 
     <main id="inicio">
@@ -112,17 +115,12 @@
         <div class="route-art" aria-hidden="true"><div class="path"></div><div class="hospital"></div></div>
       </header>
 
-      <div class="intro">
-        <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#1d3e70" d="M14 3h4v11h11v4H18v11h-4V18H3v-4h11z"/></svg>
-        <p><strong>Propósito de esta página.</strong> Hacer visible lo acordado y permitir que cada persona navegue directamente a la información que necesita. El avance del proyecto depende de complementar esta acta con el alcance del desarrollo interno y las rutas de pacientes.</p>
-      </div>
-
       <section id="desafio">
         <h2 class="section-title"><span class="section-number">1</span> Hallazgo, oportunidad y desafío</h2>
         <div class="challenge">
-          <div class="piece"><strong>Hallazgo</strong>La derivación requiere coordinación entre enfermeras navegadoras y actores internos y externos.</div>
+          <details class="concept"><summary>Hallazgo</summary><div class="detail-content"><p>Las enfermeras navegadoras experimentan una alta carga mental, provocada por la constante adaptabilidad que exige un servicio no estandarizado, altamente variable y dependiente de la articulación con múltiples actores internos y externos.</p></div></details>
           <div class="arrow" aria-hidden="true">→</div>
-          <div class="piece"><strong>Oportunidad</strong>Ordenar flujos, responsabilidades y trazabilidad para acompañar de forma más oportuna.</div>
+          <details class="concept"><summary>Oportunidad</summary><div class="detail-content"><p>Las enfermeras navegadoras, en la etapa de derivación, necesitan optimizar procesos de trabajo, debido a que la naturaleza médica del servicio conlleva que el acompañamiento del paciente sea altamente personalizado, lo que provoca sobrecarga mental al abordar todas sus tareas.</p></div></details>
           <div class="arrow" aria-hidden="true">→</div>
           <div class="piece"><strong>Desafío de diseño</strong>¿Cómo podríamos optimizar los procesos de trabajo en la etapa de derivación para realizar un acompañamiento eficaz y oportuno?</div>
         </div>
@@ -138,9 +136,9 @@
         </div>
         <div class="card">
           <h3>Lo que necesitamos definir</h3>
-          <p>Las enfermeras pueden compartir por correo o audio los cuatro perfiles de pacientes, sus rutas y los hitos más relevantes. El equipo del diplomado puede procesar ambos formatos.</p>
+          <p>Sabemos que el equipo está trabajando con Tecnología/TI de Trazabilidad en un prototipo de sistema de registro. Necesitamos conocer su alcance, funcionalidades, usuarios, datos que manejará, necesidades de las que se hará cargo y hoja de ruta de implementación. Esta información permitirá al equipo del diplomado identificar brechas no abordadas, aportar una perspectiva complementaria y colaborar con TI más allá del encargo inicial de las enfermeras. Estamos disponibles para participar en las reuniones que estimen pertinentes y co-construir un entregable que aporte valor real, sin duplicar trabajo. También pueden compartir por correo o audio los cuatro perfiles de pacientes, sus rutas y sus hitos más relevantes.</p>
         </div>
-        <details><summary>Comentarios del equipo sobre las ideas</summary><div class="detail-content"><p><strong>Analía</strong> señaló que el sistema de registro ya está en desarrollo y que el plan de navegación aún se realiza de manera no estructurada. <strong>Carla</strong> destacó que los hitos permitirían medir cumplimiento y fricciones. <strong>Carolina</strong> indicó que existen al menos cuatro tipos de pacientes con rutas distintas y que el nudo crítico de los flujos externos es la oportunidad de respuesta.</p></div></details>
+        <div class="card"><h3>Comentarios del equipo sobre las ideas</h3><p><strong>Analía</strong> señaló que el sistema de registro ya está en desarrollo y que el plan de navegación aún se realiza de manera no estructurada. <strong>Carolina</strong> indicó que existen al menos cuatro tipos de pacientes con rutas distintas y que el nudo crítico de los flujos externos es la oportunidad de respuesta.</p></div>
       </section>
 
       <section id="riesgos">
@@ -193,4 +191,3 @@
   </script>
 </body>
 </html>
-
