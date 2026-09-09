@@ -38,21 +38,18 @@
     .intro svg { flex:0 0 28px; margin-top:2px; }
     .intro p { margin:0; }
     section { scroll-margin-top:24px; margin:44px 0; }
-    .section-title { display:flex; align-items:center; gap:14px; margin:0 0 20px; color:var(--navy); font-size:clamp(1.45rem,2.5vw,2.1rem); line-height:1.12; }
-    .section-number { display:grid; place-items:center; flex:0 0 42px; width:42px; height:42px; color:#fff; background:var(--blue); border-radius:13px 13px 13px 3px; font-size:1rem; font-weight:800; transform:rotate(-3deg); }
+    .section-title { display:flex; align-items:center; gap:12px; margin:0 0 20px; color:var(--navy); font-size:clamp(1.35rem,2vw,1.8rem); line-height:1.12; }
+    .section-number { display:grid; place-items:center; flex:0 0 38px; width:38px; height:38px; color:#fff; background:var(--blue); border-radius:12px 12px 12px 3px; font-size:.92rem; font-weight:800; transform:rotate(-3deg); }
     .card { margin-top:15px; padding:25px; background:#fff; border:1px solid var(--line); border-radius:18px; box-shadow:0 9px 24px rgba(28,58,105,.06); }
     .card h3 { margin:0 0 9px; color:var(--navy); font-size:1.08rem; }
     .card > p { max-width:78ch; }
     .card > p + p { margin-top:1rem; }
     .card p:last-child { margin-bottom:0; }
-    .challenge { display:grid; grid-template-columns:1fr 46px 1fr 46px 1.3fr; gap:12px; align-items:center; }
-    .challenge .piece { min-height:140px; padding:20px; background:var(--blue-pale); border-radius:16px; }
+    .challenge { display:grid; grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr) 32px minmax(0,1fr); gap:10px; align-items:stretch; }
+    .challenge .piece { min-height:0; padding:16px; background:var(--blue-pale); border-radius:16px; }
     .challenge .piece strong { display:block; margin-bottom:8px; color:var(--blue); font-size:.78rem; letter-spacing:.09em; text-transform:uppercase; }
-    .challenge .arrow { color:var(--yellow); font-size:2rem; font-weight:900; text-align:center; }
-    .challenge details { margin:0; border:0; background:var(--blue-pale); border-radius:16px; }
-    .challenge details summary { padding:20px; align-items:flex-start; color:var(--blue); font-size:.78rem; letter-spacing:.09em; text-transform:uppercase; }
-    .challenge details[open] summary { padding-bottom:0; }
-    .challenge details .detail-content { padding:12px 20px 20px; color:var(--ink); font-size:1rem; letter-spacing:0; text-transform:none; }
+    .challenge .piece p { margin:0; font-size:.92rem; line-height:1.45; }
+    .challenge .arrow { color:var(--yellow); font-size:1.65rem; font-weight:900; text-align:center; }
     .quote { margin:18px 0 0; padding:15px 19px; border-left:4px solid var(--blue); background:#f8faff; border-radius:0 12px 12px 0; }
     .quote p { margin:0; }
     .priority-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
@@ -122,11 +119,11 @@
       <section id="desafio">
         <h2 class="section-title"><span class="section-number">1</span> Hallazgo, oportunidad y desafío</h2>
         <div class="challenge">
-          <details class="concept"><summary>Hallazgo</summary><div class="detail-content"><p>Las enfermeras navegadoras experimentan una alta carga mental, provocada por la constante adaptabilidad que exige un servicio no estandarizado, altamente variable y dependiente de la articulación con múltiples actores internos y externos.</p></div></details>
+          <article class="piece"><strong>Hallazgo</strong><p>Las enfermeras navegadoras experimentan una alta carga mental, provocada por la constante adaptabilidad que exige un servicio no estandarizado, altamente variable y dependiente de la articulación con múltiples actores internos y externos.</p></article>
           <div class="arrow" aria-hidden="true">→</div>
-          <details class="concept"><summary>Oportunidad</summary><div class="detail-content"><p>Las enfermeras navegadoras, en la etapa de derivación, necesitan optimizar procesos de trabajo, debido a que la naturaleza médica del servicio conlleva que el acompañamiento del paciente sea altamente personalizado, lo que provoca sobrecarga mental al abordar todas sus tareas.</p></div></details>
+          <article class="piece"><strong>Oportunidad</strong><p>Las enfermeras navegadoras en la etapa de derivación necesitan optimizar procesos de trabajo, debido a que la naturaleza médica del servicio conlleva que el acompañamiento del paciente sea altamente personalizado, lo que provoca sobrecarga mental al abordar todas sus tareas.</p></article>
           <div class="arrow" aria-hidden="true">→</div>
-          <div class="piece"><strong>Desafío de diseño</strong>¿Cómo podríamos optimizar los procesos de trabajo en la etapa de derivación para realizar un acompañamiento eficaz y oportuno?</div>
+          <article class="piece"><strong>Desafío de diseño</strong><p>¿Cómo podríamos optimizar los procesos de trabajo en la etapa de derivación para realizar un acompañamiento eficaz y oportuno?</p></article>
         </div>
       </section>
 
